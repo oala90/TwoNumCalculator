@@ -9,9 +9,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CalculatorViews(
-    onNumOneChange: (String) -> Unit,
+    onNumOneChange: (Int) -> Unit,
     numOne: String,
-    onNumTwoChange: (String) -> Unit,
+    onNumTwoChange: (Int) -> Unit,
     numTwo: String,
     resultLabel: String,
     result: () -> Unit
@@ -20,7 +20,7 @@ fun CalculatorViews(
         TextField(
             value = numOne,
             onValueChange = {
-                onNumOneChange(it)
+                onNumOneChange(it.toIntOrNull() ?: 0)
             },
             label = {
                 Text(text = "Enter first number")
@@ -30,17 +30,17 @@ fun CalculatorViews(
         TextField(
             value = numTwo,
             onValueChange = {
-                onNumTwoChange(it)
+                onNumTwoChange(it.toIntOrNull() ?: 0)
             },
             label = {
                 Text(text = "Enter second number")
             }
         )
 
-        Text(text = resultLabel)
-        Button(onClick = {
-            result()
-        }) {}
+        Text(text = "The result is: $resultLabel")
+        Button(onClick = { result() }) {
+            Text(text = "Click")
+        }
     }
 }
 
