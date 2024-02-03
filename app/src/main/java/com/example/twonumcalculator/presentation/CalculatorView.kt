@@ -3,12 +3,15 @@ package com.example.twonumcalculator.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.twonumcalculator.presentation.constants.Constants
@@ -31,8 +34,17 @@ fun CalculatorViews(
             TextField(
                 value = numOne,
                 onValueChange = {
-                    onNumOneChange(it)
+                    if(it.isBlank()) {
+                        onNumOneChange("0")
+                    } else {
+                        onNumOneChange(it)
+                    }
+
                 },
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number
+                ),
+                maxLines = 10,
                 label = {
                     Text(text = "Enter first number")
                 }
@@ -41,8 +53,16 @@ fun CalculatorViews(
             TextField(
                 value = numTwo,
                 onValueChange = {
-                    onNumTwoChange(it)
+                    if(it.isBlank()) {
+                        onNumTwoChange("0")
+                    } else {
+                        onNumTwoChange(it)
+                    }
                 },
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number
+                ),
+                maxLines = 10,
                 label = {
                     Text(text = "Enter second number")
                 }

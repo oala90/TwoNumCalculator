@@ -28,16 +28,16 @@ class MainActivity : ComponentActivity() {
                 ) {
                     CalculatorViews(
                         onNumOneChange = {
-                            myViewModel.numOne.value = it
+                            myViewModel.numOne.value = it.toInt()
                         },
                         numOne = numOne.toString(),
                         onNumTwoChange = {
-                            myViewModel.numTwo.value = it
+                            myViewModel.numTwo.value = it.toInt()
                         },
                         numTwo = numTwo.toString(),
                         resultLabel = result,
-                        result = {
-                            myViewModel.makeCalculation()
+                        result = { operator ->
+                            myViewModel.makeCalculation(operator)
                         }
                     )
                 }

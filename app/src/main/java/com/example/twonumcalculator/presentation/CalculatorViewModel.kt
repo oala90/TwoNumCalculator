@@ -8,19 +8,17 @@ import com.example.twonumcalculator.presentation.constants.Constants
 
 class CalculatorViewModel: ViewModel() {
 
-    val numOne = mutableIntStateOf(0)
-    val numTwo = mutableIntStateOf(0)
-    private val _result = mutableIntStateOf(0)
+    val numOne = mutableStateOf(0)
+    val numTwo = mutableStateOf(0)
+    private val _result = mutableStateOf(0)
     val result = _result.asIntState()
 
-    fun makeCalculation() {
-        fun makeCalculation(operator: Constants) {
-            _result.intValue = when(operator) {
-                Constants.SUM -> numOne.intValue + numTwo.intValue
-                Constants.REST -> numOne.intValue - numTwo.intValue
-                Constants.MULTIPLICATION -> numOne.intValue * numTwo.intValue
-                Constants.DIVISION -> numOne.intValue / numTwo.intValue
-            }
+    fun makeCalculation(operator: Constants) {
+        _result.value = when(operator) {
+            Constants.SUM -> numOne.value + numTwo.value
+            Constants.REST -> numOne.value - numTwo.value
+            Constants.MULTIPLICATION -> numOne.value * numTwo.value
+            Constants.DIVISION -> numOne.value / numTwo.value
         }
     }
 }
