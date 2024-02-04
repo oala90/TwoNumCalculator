@@ -9,11 +9,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.text.isDigitsOnly
 import com.example.twonumcalculator.presentation.constants.Constants
 
 @Composable
@@ -22,7 +24,7 @@ fun CalculatorViews(
     numOne: String,
     onNumTwoChange: (String) -> Unit,
     numTwo: String,
-    resultLabel: String,
+    resultLabel: List<ResultCache?>,
     result: (Constants) -> Unit
 ) {
     Row {
@@ -37,9 +39,10 @@ fun CalculatorViews(
                     if(it.isBlank()) {
                         onNumOneChange("0")
                     } else {
-                        onNumOneChange(it)
+                        if(it.isDigitsOnly()) {
+                            onNumOneChange(it)
+                        }
                     }
-
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number
@@ -56,12 +59,19 @@ fun CalculatorViews(
                     if(it.isBlank()) {
                         onNumTwoChange("0")
                     } else {
-                        onNumTwoChange(it)
+                        if(it.isDigitsOnly()) {
+                            onNumTwoChange(it)
+                        }
                     }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number
                 ),
+//                keyboardActions = KeyboardActions(
+//                    onDone = {
+//
+//                    }
+//                ),
                 maxLines = 10,
                 label = {
                     Text(text = "Enter second number")
@@ -71,10 +81,17 @@ fun CalculatorViews(
 //                vertical = 5.dp
 //            )
 //            )
-            Text(
-                text = resultLabel,
-                color = Color.Blue
-            )
+            resultLabel.forEachIndexed { index, resultCache ->
+                Text(
+                    text =
+                    if(resultCache !=  null) {
+                        "Result $index: $resultCache"
+                    }
+                    else { "" },
+                    color = Color.Black
+                )
+            }
+
         }
 
         Column(
@@ -107,5 +124,5 @@ fun CalculatorViews(
 @Preview(showBackground = true)
 @Composable
 fun CalculatorPreview() {
-    CalculatorViews({}, "", {}, "", "", {})
+    CalculatorViews({}, "", {}, "", emptyList(), {})
 }

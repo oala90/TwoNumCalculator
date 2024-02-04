@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             TwoNumCalculatorTheme {
                 val numOne = myViewModel.numOne.value
                 val numTwo = myViewModel.numTwo.value
-                val result = myViewModel.result.intValue.toString()
+                val result = myViewModel.results
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
