@@ -18,8 +18,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TwoNumCalculatorTheme {
-                val numOne = myViewModel.numOne.value
-                val numTwo = myViewModel.numTwo.value
+                val numOne = myViewModel.numOne.intValue
+                val numTwo = myViewModel.numTwo.intValue
                 val result = myViewModel.results
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -28,11 +28,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     CalculatorViews(
                         onNumOneChange = {
-                            myViewModel.numOne.value = it.toInt()
+                            myViewModel.numOne.intValue = it.toInt()
                         },
                         numOne = numOne.toString(),
                         onNumTwoChange = {
-                            myViewModel.numTwo.value = it.toInt()
+                            myViewModel.numTwo.intValue = it.toInt()
                         },
                         numTwo = numTwo.toString(),
                         resultLabel = result,
