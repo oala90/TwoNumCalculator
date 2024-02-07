@@ -65,25 +65,17 @@ fun CalculatorViews(
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number
                 ),
-//                keyboardActions = KeyboardActions(
-//                    onDone = {
-//
-//                    }
-//                ),
                 maxLines = 10,
                 label = {
                     Text(text = "Enter second number")
                 }
             )
-//            Divider(color = Color.DarkGray, thickness = 0.dp, modifier = Modifier.padding(
-//                vertical = 5.dp
-//            )
-//            )
+
             resultLabel.forEachIndexed { index, resultCache ->
                 Text(
                     text =
                     if(resultCache !=  null) {
-                        "Result $index: $resultCache"
+                        "Result $index: ${resultCache.result}"
                     }
                     else { "" },
                     color = Color.Black
